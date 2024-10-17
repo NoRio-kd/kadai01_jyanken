@@ -1,0 +1,120 @@
+
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    text-align: center;
+    padding: 20px;
+    
+}
+
+.quiz-container {
+    background-color: white;
+    border-radius: 10px;
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0px auto;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    
+}
+
+div#question {
+    font-size: 30px;
+}
+
+h1 {
+    font-size: 24px;
+}
+
+.choices {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* height: 0px; */
+    width: 1200px;
+    margin: 0px auto;
+}
+
+.choices button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+#choice1 {
+    background-image: url(../img/ronald.webp);
+    background-repeat: no-repeat;
+    background-size: cover;
+    object-fit: cover;
+    background-position: center center;
+    height: 300px;
+    width: 200px;
+    padding-top: 180px;
+    font-size: 24px;
+}
+
+#choice2 {
+    background-image: url(../img/messi.jpeg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    object-fit: cover;
+    background-position: center center;
+    height: 300px;
+    width: 200px;
+    padding-top: 180px;
+    font-size: 24px;
+} 
+
+#choice3 {
+    background-image: url(../img/mbappe.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    object-fit: cover;
+    background-position: center center;
+    height: 300px;
+    width: 200px;
+    padding-top: 180px;
+    font-size: 24px;
+} 
+
+#choice4 {
+    background-image: url(../img/take.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    object-fit: cover;
+    background-position: center center;
+    height: 300px;
+    width: 200px;
+    padding-top: 180px;
+    font-size: 24px;
+} 
+
+
+.choices button:hover {
+    background-color: #0056b3;
+}
+
+#next-btn {
+    display: none;
+    padding: 10px 20px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.hide {
+    display: none;
+}
+
+#result {
+    margin-top: 20px;
+}

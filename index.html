@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QUiZ
+    </title>
+    <!-- jQueryのCDNを読み込み -->
+     <link rel="stylesheet" href="./css/quizjquery.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <div class="quiz-container">
+        <h1 id="lead">Please select the correct option</h1>
+        <div id="quiz">
+            <div id="question-container">
+                <div id="question">ここに質問が表示されます</div>
+                <div class="choices">
+                    <button class="choice" id="choice1"></button>
+                    <button class="choice" id="choice2"></button>
+                    <button class="choice" id="choice3"></button>
+                    <button class="choice" id="choice4"></button>
+                </div>
+            </div>
+            <button id="next-btn">NEXT</button>
+        </div>
+        
+        <div  id="explanation" class="hide1">
+            <!-- <h2>解説</h2> -->
+        </div>
+        <div id="result" class="hide">
+            <h2>結果</h2>
+            <p id="score"></p>
+        </div>
+    </div>
+
+    <script>
+        // クイズデータ
+        const quizData = [
+            {
+                question: "Who is the best player in the planet?",
+                choices: ["C.Ronaldo", "Messi", "Mbappe", "Take Kubo"],
+                correct: 1
+            }
+        ];
+
+        let currentQuiz = 0; //0の時が最初のクイズ。1が２番目のクイズ。子をcurrentQuizDataに保存する
+        let score = 0;
+
+        // jQueryによる初期クイズのロード
+        function loadQuiz() {
+            const currentQuizData = quizData[currentQuiz];
+            $('#question').text(currentQuizData.question); // 質問を表示
+            $('.choice').each(function(index) {
+                $(this).text(currentQuizData.choices[index]).removeClass('correct wrong'); // 選択肢を設定
+            });
+            $('#next-btn').hide(); // 次へボタンを隠す
+            $('#next-btn').hide1(); // かいせつボタンを隠す
+        }
+
+        // 正解かどうかをチェック
+        function checkAnswer(index) {
+            const currentQuizData = quizData[currentQuiz];
+            if (index === currentQuizData.correct) { // 正解の場合
+                score++; // スコアを加算
+                $('#choice' + (index + 1)).addClass('correct'); // 正解の選択肢にクラスを追加
+            } else { // 不正解の場合
+                $('#choice' + (index + 1)).addClass('wrong'); // 間違えた選択肢にクラスを追加
+            }
+            $('#next-btn').show(); // 次へボタンを表示
+        }
+
+        // 選択肢をクリックした時の処理
+        $('.choice').on('click', function() {
+            const index = $(this).index(); // クリックされた選択肢のインデックスを取得
+            if ($('#next-btn').is(':visible')) return; // 次へボタンが表示されている場合は何もしない
+            checkAnswer(index); // 答えをチェック
+        });
+
+        // 次へボタンがクリックされた時
+        $('#next-btn').on('click', function() {
+            currentQuiz++; // 次の問題へ
+            if (currentQuiz < quizData.length) {
+                loadQuiz(); // 新しいクイズをロード
+            } else {
+                displayResult(); // 結果を表示
+            }
+        });
+
+        // 結果の表示
+        function displayResult() {
+            $('#quiz').addClass('hide'); // クイズ部分を非表示
+            // $('#explanation').removeClass('hide1'); // 結果部分を表示
+            $('#lead').addClass('hide'); // lead部分を非表示
+            $('#result').removeClass('hide'); // 結果部分を表示
+            $('#score').text(`あなたのScoreは ${score}/${quizData.length} です`); // スコアを表示
+            $('#explanation').html('<H2>解説</h2><div>正解はMessi以外はあり得ません<br>Takeはサッカーの将来を担う選手です。</div>');　//解説を表示
+                // これ開業するとダメなの？
+        }
+
+        // 初期ロード
+        $(document).ready(function() {
+            loadQuiz(); // ページ読み込み時にクイズをロード
+        });
+    </script>
+</body>
+</html>
